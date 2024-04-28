@@ -80,3 +80,7 @@ db.products.insertMany([
 
 // Find products where quantity is less than 12 and name is Apple
 db.products.find( { products:{$elemMatch:{quantity:{$gt:10},fruit:'Apple'}}} )
+
+
+// When using $elemMatch, the query will return the document if any of the elements in the array match the condition.
+// syntax of $elemMatch is { <field>: { $elemMatch: { <query1>, <query2>, ... } } }
