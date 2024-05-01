@@ -124,6 +124,24 @@
     }
   ]
 
+  // 2nd way - creating a new field with the size of tags array
+  [
+    {
+      $addFields: {
+        numOfTags:{
+          $size: {$ifNull:["$tags",[]]} // if there is no value then calculate it as empty array
+        }
+      }
+    },
+    {
+      $group: {
+        _id: null,
+        avg: {
+          $avg: "$numOfTags"
+        }
+      }
+    }
+  ]
 
 
   
