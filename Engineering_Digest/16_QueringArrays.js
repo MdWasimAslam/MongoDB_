@@ -84,3 +84,78 @@ db.products.find( { products:{$elemMatch:{quantity:{$gt:10},fruit:'Apple'}}} )
 
 // When using $elemMatch, the query will return the document if any of the elements in the array match the condition.
 // syntax of $elemMatch is { <field>: { $elemMatch: { <query1>, <query2>, ... } } }
+
+
+
+
+
+
+
+// --------- Revision ------
+
+db.students.insertMany([
+  {
+    "name": "John Doe",
+    "age": 20,
+    "hobbies": ["reading", "sports", "music"],
+    "experience": [
+      {"company": "Google", "duration": 2},
+      {"company": "Microsoft", "duration": 1}
+    ],
+    "identity": {"hasPancard": true, "hasAadharcard": true}
+  },
+  {
+    "name": "Jane Smith",
+    "age": 22,
+    "hobbies": ["painting", "traveling", "cooking"],
+    "experience": [
+      {"company": "Amazon", "duration": 3},
+      {"company": "Microsoft", "duration": 2}
+    ],
+    "identity": {"hasPancard": true, "hasAadharcard": false}
+  },
+  {
+    "name": "Michael Johnson",
+    "age": 21,
+    "hobbies": ["coding", "gardening", "photography"],
+    "experience": [
+      {"company": "Apple", "duration": 1.5}
+    ],
+    "identity": {"hasPancard": false, "hasAadharcard": true}
+  },
+  {
+    "name": "Emily Davis",
+    "age": 23,
+    "hobbies": ["dancing", "yoga", "volunteering"],
+    "experience": [
+      {"company": "Tesla", "duration": 2},
+      {"company": "SpaceX", "duration": 1}
+    ],
+    "identity": {"hasPancard": true, "hasAadharcard": true}
+  },
+  {
+    "name": "William Brown",
+    "age": 19,
+    "hobbies": ["gaming", "cooking", "playing guitar"],
+    "experience": [
+      {"company": "Amazon", "duration": 1},
+      {"company": "Microsoft", "duration": 0.5}
+    ],
+    "identity": {"hasPancard": true, "hasAadharcard": false}
+  },
+])
+
+// Find students whose hobbies is cooking
+db.students.find({hobbies:'cooking'});
+
+
+// Find students who has experienced in Amazon
+db.students.find({'experience.company':'Amazon'})
+
+
+// How many students have worked in Microsoft
+db.students.find({'experience.company':'Microsoft'}).count()
+
+
+// Find students who have worked in only 1 company
+db.students.find({ experience:{$size:1} })
