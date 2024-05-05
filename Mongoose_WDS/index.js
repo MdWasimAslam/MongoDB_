@@ -7,7 +7,7 @@ const connectDB = async () => {
         console.log(`MongoDB Connected: ${conn.connection.host}`);
 
         // Call the createUser function after the connection is established
-        await mongoAggregate();
+        await insertQuery();
     } catch (err) {
         console.error(err);
         process.exit(1);
@@ -16,10 +16,10 @@ const connectDB = async () => {
 
 connectDB();
 
-const mongoQuery = async () => {
+const insertQuery = async () => {
     try {
         const db = mongoose.connection.db;
-        const res = await db.collection('users').insertOne({name:'rahul',age:21});
+        const res = await db.collection('users').insertOne({name:'rahul'});
         console.log(res);
     } catch (err) {
         console.error(err);
